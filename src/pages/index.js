@@ -1,20 +1,16 @@
-import React from "react";
-import { Link } from "gatsby";
+import React from 'react'
+import { Link } from 'gatsby'
 
-import Layout from "../components/layout";
-import Image from "../components/image";
-import SEO from "../components/seo";
+import Layout from '../components/Layout'
+import SEO from '../components/Seo'
+
+import Cube from '../components/Cube'
 
 const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hello world</h1>
-    <p>TODO: Build my site!</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/blog">Blog</Link>
-  </Layout>
-);
+	<Layout page="Home">
+		<SEO title="Home" />
+		<Cube />
+	</Layout>
+)
 
-export default IndexPage;
+export default IndexPage
