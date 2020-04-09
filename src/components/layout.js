@@ -11,8 +11,8 @@ import PropTypes from 'prop-types'
 import { useStaticQuery, graphql } from 'gatsby'
 
 import Header from './header'
-import SideMenu from './sideMenu'
-import Footer from './footer'
+import SideMenu from './SideMenu'
+import Footer from './Footer'
 
 import theme from '../styles/theme'
 import vars from '../styles/vars'
