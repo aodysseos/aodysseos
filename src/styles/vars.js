@@ -2,6 +2,7 @@
 const vars = {
 	gap: { sm: 0, md: 0, lg: 0 },
 	mainWidth: { sm: 0, md: 0, lg: 1440 },
+	headerWidth: { sm: 65, md: 65, lg: 65 },
 	sideWidth: { sm: 105, md: 105, lg: 105 },
 	breakpoints: { mobile: 25.875, tablet: 48, desktop: 1280 }
 }

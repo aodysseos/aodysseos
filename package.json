@@ -26,9 +26,11 @@
 		"prop-types": "^15.7.2",
 		"react": "^16.11.0",
 		"react-dom": "^16.11.0",
+		"react-google-recaptcha": "^2.0.1",
 		"react-helmet": "^5.2.1",
 		"styled-components": "^5.0.1",
-		"styled-system": "^5.1.4"
+		"styled-system": "^5.1.4",
+		"yup": "^0.28.3"
 	},
 	"devDependencies": {
 		"prettier": "^1.19.1"
@@ -39,6 +41,8 @@
 	"license": "MIT",
 	"scripts": {
 		"build": "gatsby build",
+		"build:dev": "GATSBY_ACTIVE_ENV=development npm run build",
+		"build:prod": "GATSBY_ACTIVE_ENV=production npm run build",
 		"develop": "gatsby develop",
 		"format": "prettier --write \"**/*.{js,jsx,json,md}\"",
 		"start": "gatsby clean && npm run develop",
