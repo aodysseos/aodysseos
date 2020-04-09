@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Position from './Position'
+import Position from './position'
 
 import vars from '../styles/vars'
 

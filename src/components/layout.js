@@ -10,9 +10,9 @@ import styled, { ThemeProvider } from 'styled-components'
 import PropTypes from 'prop-types'
 import { useStaticQuery, graphql } from 'gatsby'
 
-import Header from './Header'
-import SideMenu from './SideMenu'
-import Footer from './Footer'
+import Header from './header'
+import SideMenu from './sideMenu'
+import Footer from './footer'
 
 import theme from '../styles/theme'
 import vars from '../styles/vars'
