@@ -4,9 +4,8 @@ import _ from 'lodash'
 import { useStaticQuery, graphql } from 'gatsby'
 
 import Layout from '../components/layout'
-import ArticleCard from '../components/articleCard'
+import ArticleCard from '../components/ArticleCard'
 import SEO from '../components/seo'
-import Heading from '../components/heading'
 import Banner from '../components/banner'
 import styled from 'styled-components'
 
