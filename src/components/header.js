@@ -7,7 +7,7 @@ import vars from '../styles/vars'
 
 const Head = styled.div`
 	width: 100%;
-	height: ${vars.sideWidth.sm}px;
+	height: ${vars.headerWidth.sm}px;
 	position: fixed;
 	left: 0px;
 	top: 0px;
