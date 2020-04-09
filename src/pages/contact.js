@@ -5,8 +5,8 @@ import styled from 'styled-components'
 
 import Layout from '../components/layout'
 import SEO from '../components/seo'
-import Banner from '../components/banner'
-import Form from '../components/form'
+import Banner from '../components/Banner'
+import Form from '../components/Form'
 
 const Contact = () => {
 	return (

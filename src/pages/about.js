@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 import Layout from '../components/layout'
 import SEO from '../components/seo'
-import Banner from '../components/banner'
+import Banner from '../components/Banner'
 
 const About = () => {
 	return (

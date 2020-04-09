@@ -6,7 +6,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 import Layout from '../components/layout'
 import ArticleCard from '../components/ArticleCard'
 import SEO from '../components/seo'
-import Banner from '../components/banner'
+import Banner from '../components/Banner'
 import styled from 'styled-components'
 
 const ArticleList = styled.div`

@@ -5,7 +5,7 @@ import RichTextRenderer from '../utils/richTextRenderer'
 import linkResolver from '../utils/linkResolver'
 
 import Layout from '../components/layout'
-import Heading from '../components/heading'
+import Heading from '../components/Heading'
 
 import _get from 'lodash/get'
 import _map from 'lodash/map'

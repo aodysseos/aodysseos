@@ -4,7 +4,7 @@ import { Link } from 'gatsby'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 
-import Cube from '../components/cube'
+import Cube from '../components/Cube'
 
 const IndexPage = () => (
 	<Layout page="Home">
