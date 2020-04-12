@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import * as Yup from 'yup'
 import _get from 'lodash/get'
 
-import { Formik, Field, Form } from 'formik'
+import { Formik, Form } from 'formik'
 
 import Heading from '../Heading'
 import InputField from './InputField'
@@ -47,24 +47,6 @@ const ContactForm = () => {
 		if (!token) {
 			setIsExpired(true)
 		}
-	}
-
-	const handleValidation = (values, { setErrors }) => {
-		console.log({ values, setErrors })
-		const errors = {}
-		if (!values.email) {
-			errors.email = 'Required'
-		} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-			errors.email = 'Invalid email address'
-		}
-
-		if (!values.message) {
-			errors.message = 'Required'
-		} else if (values.message.length > 10000) {
-			errors.message = 'Wow, that is a long message! Better keep it short.'
-		}
-
-		setErrors(errors)
 	}
 
 	const validationSchema = Yup.object().shape({
@@ -138,7 +120,6 @@ const ContactForm = () => {
 			}}
 		>
 			{({ errors, handleSubmit, handleChange, isSubmitting, isValid, status, values }) => {
-				console.log({ errors, handleSubmit, handleChange, isSubmitting, isValid, status, values })
 				return (
 					<StyledForm>
 						<InputField name="name" label="Name" type="text" errors={errors} onClick={handleInputFieldClick} />
