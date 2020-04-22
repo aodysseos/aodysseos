@@ -4,7 +4,7 @@ import _ from 'lodash'
 import { useStaticQuery, graphql } from 'gatsby'
 
 import Layout from '../components/layout'
-import ArticleCard from '../components/ArticleCard'
+import ArticleCard from '../components/Article/card'
 import SEO from '../components/seo'
 import Banner from '../components/Banner'
 import styled from 'styled-components'
@@ -30,6 +30,14 @@ const Articles = () => {
 						tags {
 							name
 							id
+						}
+						colorBackground
+						colorPrimary
+						colorSecondary
+						bannerIcons {
+							file {
+								url
+							}
 						}
 						heroImage {
 							file {

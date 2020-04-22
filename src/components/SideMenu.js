@@ -10,8 +10,8 @@ const Wrapper = styled.div`
 	height: 100%;
 	position: fixed;
 	top: 0;
-	${(props) => {
-		return props.position === 'left'
+	${({ position }) => {
+		return position === 'left'
 			? css`
 					left: 10px;
 					transform: rotate(180deg);

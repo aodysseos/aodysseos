@@ -7,7 +7,7 @@ const StyledButton = styled.button`
 	font-weight: 500;
 	min-width: 150px;
 	height: 60px;
-	color: ${({ theme }) => theme.secondary};
+	color: ${({ theme }) => theme.background};
 	background-color: ${({ theme }) => theme.buttonBorder};
 	border: 3px solid;
 	border-color: ${({ theme }) => theme.buttonBorder};

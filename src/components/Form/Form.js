@@ -59,11 +59,6 @@ const ContactForm = () => {
 		const recaptchaToken = recaptchaRef.current.getValue()
 		const reqConfig = {
 			method: 'POST',
-			mode: 'cors',
-			cache: 'no-cache',
-			credentials: 'omit',
-			redirect: 'follow',
-			referrer: 'client',
 			headers: {
 				'Content-Type': 'application/json'
 			},

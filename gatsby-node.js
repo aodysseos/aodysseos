@@ -7,10 +7,10 @@
 // You can delete this file if you're not using it
 const path = require(`path`)
 const slash = require(`slash`)
+const _get = require(`lodash/get`)
 
 exports.createPages = ({ graphql, actions }) => {
 	const { createPage } = actions
-	// we use the provided allContentfulBlogPost query to fetch the data from Contentful
 	return graphql(
 		`
       {
@@ -23,6 +23,14 @@ exports.createPages = ({ graphql, actions }) => {
               tags {
                 name
                 id
+							}
+							colorBackground
+							colorPrimary
+							colorSecondary
+							bannerIcons {
+                file {
+                  url
+                }
               }
               heroImage {
                 file {
@@ -42,22 +50,25 @@ exports.createPages = ({ graphql, actions }) => {
 			if (result.errors) {
 				console.log('Error retrieving contentful data', result.errors)
 			}
-			console.log({ result })
 			// Resolve the paths to our template
 			const articleTemplate = path.resolve('./src/template/article-template.js')
 			// Then for each result we create a page.
 			result.data.allContentfulArticle.edges.forEach((edge) => {
 				createPage({
-					path: `/articles/${edge.node.slug}/`,
+					path: `/articles/${_get(edge, 'node.slug')}/`,
 					component: slash(articleTemplate),
 					context: {
-						slug: edge.node.slug,
-						id: edge.node.id,
-						title: edge.node.title,
-						subTitle: edge.node.subTitle,
-						tags: edge.node.tags,
-						heroImage: edge.node.heroImage,
-						main: edge.node.main.json
+						slug: _get(edge, 'node.slug'),
+						id: _get(edge, 'node.id'),
+						title: _get(edge, 'node.title'),
+						subTitle: _get(edge, 'node.subTitle'),
+						tags: _get(edge, 'node.tags'),
+						colorBackground: _get(edge, 'node.colorBackground'),
+						colorPrimary: _get(edge, 'node.colorPrimary'),
+						colorSecondary: _get(edge, 'node.colorSecondary'),
+						bannerIcons: _get(edge, 'node.bannerIcons'),
+						heroImage: _get(edge, 'node.heroImage'),
+						main: _get(edge, 'node.main.json')
 					}
 				})
 			})

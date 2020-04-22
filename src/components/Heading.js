@@ -1,16 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
 import { variant } from 'styled-system'
-
-import theme from '../styles/theme'
+import { Link } from 'gatsby'
+import AniLink from 'gatsby-plugin-transition-link/AniLink'
 
 const H1 = styled.h1(
 	{
-		color: `${({ theme }) => theme.primary}`
+		fontFamily: ({ theme }) => theme.fontFamily,
+		color: ({ theme }) => theme.primary
 	},
 	variant({
 		variants: {
 			primary: {
+				fontSize: '34px',
+				lineHeight: '40px',
 				fontWeight: 800,
 				marginBottom: '0.5rem'
 			},
@@ -23,18 +26,18 @@ const H1 = styled.h1(
 
 const H2 = styled.h2(
 	{
-		color: '#767676'
+		fontFamily: ({ theme }) => theme.fontFamily,
+		color: ({ theme }) => theme.secondary
 	},
 	variant({
 		variants: {
 			primary: {
+				fontSize: '34px',
+				lineHeight: '40px',
 				fontWeight: 300,
-				fontSize: '24px',
-				lineHeight: '32px',
-				letterSpacing: '-1.33px'
+				letterSpacing: '-0.8px'
 			},
 			secondary: {
-				color: '#2B2B2B',
 				fontWeight: 800,
 				display: 'inline'
 			}
@@ -44,13 +47,13 @@ const H2 = styled.h2(
 
 const H3 = styled.h3(
 	{
-		color: '#767676'
+		fontFamily: ({ theme }) => theme.fontFamily,
+		color: ({ theme }) => theme.primary
 	},
 	variant({
 		variants: {
 			primary: {
 				fontSize: '34px',
-				color: '#2B2B2B',
 				fontWeight: 800,
 				display: 'inline'
 			},
@@ -61,8 +64,8 @@ const H3 = styled.h3(
 
 const H4 = styled.h4(
 	{
-		appearance: 'none',
-		fontFamily: 'Montserrat'
+		fontFamily: ({ theme }) => theme.fontFamily,
+		color: ({ theme }) => theme.secondary
 	},
 	variant({
 		variants: {
@@ -70,8 +73,29 @@ const H4 = styled.h4(
 				fontSize: '34px',
 				fontWeight: 300,
 				display: 'inline',
-				letterSpacing: '-0.8px',
-				color: '#767676'
+				letterSpacing: '-0.8px'
+			},
+			secondary: {
+				color: 'black',
+				bg: 'secondary'
+			}
+		}
+	})
+)
+
+const Tag = styled(AniLink)(
+	{
+		fontFamily: ({ theme }) => theme.fontFamily,
+		color: ({ theme }) => theme.tertiary
+	},
+	variant({
+		variants: {
+			primary: {
+				fontSize: '0.875rem',
+				lineHeight: '1.1',
+				fontWeight: 400,
+				display: 'inline',
+				letterSpacing: '-0.8px'
 			},
 			secondary: {
 				color: 'black',
@@ -83,8 +107,8 @@ const H4 = styled.h4(
 
 const ErrorMessage = styled.span(
 	{
-		color: `#d50000`,
-		fontFamily: 'Montserrat'
+		fontFamily: ({ theme }) => theme.fontFamily,
+		color: ({ theme }) => theme.error
 	},
 	variant({
 		variants: {
@@ -104,8 +128,8 @@ const ErrorMessage = styled.span(
 
 const NotficationMessage = styled.span(
 	{
-		color: `#2B2B2B`,
-		fontFamily: 'Montserrat'
+		fontFamily: ({ theme }) => theme.fontFamily,
+		color: ({ theme }) => theme.primary
 	},
 	variant({
 		variants: {
@@ -123,12 +147,21 @@ const NotficationMessage = styled.span(
 	})
 )
 
-const Heading = ({ heading, variant, children }) =>
+const Heading = ({ heading, variant, children, ...rest }) =>
 	({
-		1: <H1 variant={variant}>{children}</H1>,
+		1: (
+			<H1 variant={variant} color="error">
+				{children}
+			</H1>
+		),
 		2: <H2 variant={variant}>{children}</H2>,
 		3: <H3 variant={variant}>{children}</H3>,
 		4: <H4 variant={variant}>{children}</H4>,
+		tag: (
+			<Tag variant={variant} {...rest}>
+				{children}
+			</Tag>
+		),
 		error: <ErrorMessage variant={variant}>{children}</ErrorMessage>,
 		notify: <NotficationMessage variant={variant}>{children}</NotficationMessage>
 	}[heading] || <p>{children}</p>)
