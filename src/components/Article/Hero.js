@@ -41,8 +41,8 @@ const Hero = ({ imageUrl, bannerIcons, backgroundColor }) => (
 	<Wrapper src={imageUrl} backgroundColor={backgroundColor}>
 		{_size(bannerIcons) > 0 && (
 			<IconsWrapper>
-				{_map(bannerIcons, (icon) => {
-					return <Icon src={getAssetSrc(icon)} />
+				{_map(bannerIcons, (icon, index) => {
+					return <Icon key={index} src={getAssetSrc(icon)} />
 				})}
 			</IconsWrapper>
 		)}
