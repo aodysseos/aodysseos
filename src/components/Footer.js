@@ -7,7 +7,7 @@ import vars from '../styles/vars'
 
 const Wrapper = styled.div`
 	width: 100%;
-	height: ${vars.sideWidth.sm}px;
+	height: ${vars.sideWidth.desktop};
 	display: flex;
 	justify-content: center;
 	align-items: flex-end;

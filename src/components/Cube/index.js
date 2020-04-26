@@ -4,14 +4,15 @@ import _get from 'lodash/get'
 import _map from 'lodash/map'
 import _random from 'lodash/random'
 
-import { useMousePosition } from './../../hooks/useMousePosition'
+import useMedia from '../../hooks/useMedia'
+import useMousePosition from '../../hooks/useMousePosition'
 
 import vars from '../../styles/vars'
 import Surface from './../../assets/surface.svg'
 
 const CubeContainer = styled.div`
 	width: 100%;
-	height: calc(100vh - (2 * ${vars.sideWidth.sm}px));
+	height: calc(100vh - (2 * ${vars.sideWidth.desktop}));
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -27,8 +28,8 @@ const lineGrow = keyframes`
 const CubeSurfaces = styled.div`
 	position: relative;
 	margin: 0 auto;
-	height: ${(props) => props.size}px;
-	width: ${(props) => props.size}px;
+	height: ${({ size }) => size}px;
+	width: ${({ size }) => size}px;
 	/* transition: transform .1s ease-in-out; */
 	transform-style: preserve-3d;
 	transform: ${({ rotation }) => {
@@ -39,14 +40,14 @@ const CubeSurfaces = styled.div`
 	}};
 
 	> div {
-		height: ${(props) => props.size}px;
-		width: ${(props) => props.size}px;
 		position: absolute;
 		background-color: rgba(0, 0, 0, 0.001);
 		/* border: 1px solid rgba(0, 0, 0, 0.1); */
 		overflow: hidden;
 
 		${({ size }) => css`
+			height: ${size}px;
+			width: ${size}px;
 			&:nth-child(1) {
 				transform: rotateX(90deg) translateZ(${size / 2}px);
 			}
@@ -82,6 +83,7 @@ const CubeSurfaces = styled.div`
 const Cube = () => {
 	const { position, rotation } = useMousePosition()
 	const surfaces = [ 'one', 'two', 'three', 'four', 'five', 'six' ]
+	const media = useMedia()
 
 	return (
 		<CubeContainer>

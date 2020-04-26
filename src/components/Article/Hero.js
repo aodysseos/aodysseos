@@ -4,15 +4,23 @@ import _map from 'lodash/map'
 import _size from 'lodash/size'
 import { getAssetSrc } from '../../utils/contentful/helpers'
 
+import media from '../../styles/media'
+
 const Wrapper = styled.div`
   /* background-image: url("${(props) => props.src}");
 	background-position: center top; */
 	background-color: ${(props) => props.backgroundColor};
-  margin: 0px 0px 0px auto;
+  
   min-height: 100px;
-  width: 83%;
   height: 393.024px;
-  overflow: hidden;
+	overflow: hidden;
+	${media.greaterThan('tablet')`
+		width: 100%;
+	`};
+	${media.greaterThan('desktop')`
+		width: 83%;
+		margin: 0 0 0 auto;	
+	`};
 `
 
 const IconsWrapper = styled.div`

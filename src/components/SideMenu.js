@@ -5,8 +5,10 @@ import _map from 'lodash/map'
 
 import vars from '../styles/vars'
 
+import media from '../styles/media'
+
 const Wrapper = styled.div`
-	width: ${vars.sideWidth.sm}px;
+	width: ${vars.sideWidth.desktop};
 	height: 100%;
 	position: fixed;
 	top: 0;
@@ -20,11 +22,17 @@ const Wrapper = styled.div`
 					right: 10px;
 				`
 	}};
-	display: flex;
+	z-index: 9;
+	display: none;
 	flex-direction: row;
 	justify-content: flex-end;
 	align-items: center;
-	z-index: 9;
+	${media.greaterThan('tablet')`
+		display: none;
+	`};
+	${media.greaterThan('desktop')`
+		display: flex;
+	`};
 	/* background-color: rgba(0, 0, 0, 0.1); */
 `
 
@@ -42,7 +50,7 @@ const Item = styled.li`
 		padding: 10px 20px;
 		> span {
 			position: relative;
-			color: ${(props) => props.theme.primary};
+			color: ${({ theme }) => theme.primary};
 			&::after {
 				content: "";
 				position: absolute;
@@ -50,7 +58,7 @@ const Item = styled.li`
 				left: 0;
 				height: 100%;
 				width: 1px;
-				background-color: ${(props) => props.theme.primary};
+				background-color: ${({ theme }) => theme.primary};
 				transform: scaleY(0);
 				transform-origin: bottom left;
 				transition: transform .3s ease-out, -webkit-transform .3s ease-out;
@@ -79,7 +87,7 @@ const Item = styled.li`
 		left: 50%;
 		height: 12.5vh;
 		width: 1px;
-		background-color: ${(props) => props.theme.primary};
+		background-color: ${({ theme }) => theme.primary};
 	}
 `
 

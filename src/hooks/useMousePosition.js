@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { useWindowSize } from './useWindowSize'
+import useWindowSize from './useWindowSize'
 
-export const useMousePosition = () => {
+const useMousePosition = () => {
 	const [ position, setPosition ] = useState({ x: 1126, y: 599 })
 	const [ rotation, setRotation ] = useState({ x: 141, y: 137 })
 
@@ -30,3 +30,5 @@ export const useMousePosition = () => {
 
 	return { position, rotation }
 }
+
+export default useMousePosition

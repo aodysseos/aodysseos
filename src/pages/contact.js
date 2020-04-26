@@ -12,7 +12,10 @@ const Contact = () => {
 	return (
 		<Layout>
 			<SEO title="Contact" />
-			<Banner title={`Contact`} subtitle={`I write about Web development, Javascript, opinion and more.`} />
+			<Banner
+				title={`Contact`}
+				subtitle={`Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`}
+			/>
 			<Form />
 		</Layout>
 	)

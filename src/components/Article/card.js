@@ -5,12 +5,22 @@ import _map from 'lodash/map'
 import _size from 'lodash/size'
 import { getAssetSrc } from '../../utils/contentful/helpers'
 
-import Heading from '../Heading'
+import CardTitle from './CardTitle'
+
+import vars from '../../styles/vars'
+import media from '../../styles/media'
 
 const Article = styled.article`
 	display: flex;
 	flex-direction: column;
-	flex: 0 0 50%;
+	flex: 0 0 100%;
+	margin-bottom: 3rem;
+	${media.greaterThan('tablet')`
+		flex: 0 0 50%;
+	`};
+	${media.greaterThan('desktop')`
+		flex: 0 0 50%;
+	`};
 	&:nth-child(odd) {
 		padding-left: 12px;
 	}
@@ -21,12 +31,22 @@ const Article = styled.article`
 		flex: 0 0 100%;
 		padding-left: 0;
 		padding-right: 0;
-		> .card-heading {
-			width: 48%;
+		> .title-card {
+			width: 100%;
 			min-height: 192px;
-			padding: 32px;
-			margin: -64px auto 32px calc(2%);
+			padding: 2rem 0;
+			margin: 0;
 			background-color: ${({ theme }) => theme.background};
+			${media.greaterThan('tablet')`
+				width: 84%;
+				padding: 2rem 2rem;
+				margin: -64px auto 2rem 2%;
+			`};
+			${media.greaterThan('desktop')`
+				width: 48%;
+				padding: 2rem 2rem;
+				margin: -64px auto 2rem 2%;
+			`};
 		}
 	}
 `
@@ -39,19 +59,6 @@ const Thumbnail = styled.div`
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-`
-
-const Header = styled.div`
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	flex: 1;
-	margin: 32px 0px;
-`
-
-const CardLink = styled(Link)`
-	text-decoration: none;
-	> h3 { padding-right: 5px; }
 `
 
 const IconsWrapper = styled.div`
@@ -94,16 +101,7 @@ const Card = ({
 					<Thumbnail url={getAssetSrc(heroImage)} />
 				)}
 			</Link>
-			<Header className={`card-heading`}>
-				<CardLink to={`/articles/${slug}`}>
-					<Heading heading={3} variant={`primary`}>
-						{title}
-					</Heading>
-					<Heading heading={4} variant={`primary`}>
-						{subTitle}
-					</Heading>
-				</CardLink>
-			</Header>
+			<CardTitle slug={slug} title={title} subtitle={subTitle} />
 		</Article>
 	)
 }

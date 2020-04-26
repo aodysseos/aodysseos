@@ -31,19 +31,14 @@ const ExternalLink = styled.a`
 
 const IframeContainer = styled.div`
 	position: relative;
-	padding-bottom: 47.25%;
-	height: 0;
 	overflow: hidden;
 	width: 100%;
-	height: 100%;
+	height: auto;
 	& iframe {
 		width: 100%;
 		height: 500px;
 		border: 0;
 		overflow: hidden;
-		position: absolute;
-		top: 0;
-		left: 0;
 	}
 `
 

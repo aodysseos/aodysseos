@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useMousePosition } from '../hooks/useMousePosition'
+import useMousePosition from '../hooks/useMousePosition'
 
 const Wrapper = styled.div`
 	font-family: "Montserrat";

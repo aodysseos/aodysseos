@@ -1,34 +1,49 @@
 import React from 'react'
-import Img from 'gatsby-image'
 import styled, { css } from 'styled-components'
-import richTextRenderer from '../utils/contentful'
-import { getAssetType, getAssetSrc, getAssetTitle } from '../utils/contentful/helpers'
-
-import Layout from '../components/layout'
-import Heading from '../components/Heading'
-
-import Hero from '../components/Article/Hero'
-
 import _get from 'lodash/get'
 import _map from 'lodash/map'
 import _size from 'lodash/size'
 import _join from 'lodash/join'
 
-const Article = styled.article`padding: 10px;`
+import Layout from '../components/layout'
+import Heading from '../components/Heading'
+import Hero from '../components/Article/Hero'
+
+import richTextRenderer from '../utils/contentful'
+import { getAssetSrc } from '../utils/contentful/helpers'
+
+import vars from '../styles/vars'
+import media from '../styles/media'
+
+const Article = styled.article``
 
 const TitleCard = styled.div`
-	width: 58%;
+	width: 100%;
+	margin: 0;
 	min-height: 192px;
-	padding: 32px;
-	/* margin: -64px auto 32px calc(8% + 32px); */
-	margin: -64px auto 32px 8%;
+	padding: ${vars.gap.mobile};
 	background: #fff;
+	${media.greaterThan('tablet')`
+		width: 84%;
+		margin: -64px auto ${vars.gap.tablet} 8%;
+	`};
+	${media.greaterThan('desktop')`
+		width: 58%;
+		margin: -64px auto ${vars.gap.desktop} 8%;
+	`};
 `
 
 const Content = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
+	margin: 0 ${vars.gap.mobile};
+	${media.greaterThan('tablet')`
+		margin: 0 ${vars.gap.tablet};
+	`};
+	${media.greaterThan('desktop')`
+		margin: 0 ${vars.gap.desktop};
+	`};
 	> p,
 	> h3,
 	> h4,
@@ -38,8 +53,15 @@ const Content = styled.div`
 	> ol,
 	> blockquote {
 		display: block;
-		width: 55%;
-		margin: 0px calc(8% + 32px) 36px auto;
+		margin: 0 auto 2.25rem 0;
+		${media.greaterThan('tablet')`
+			width: 84%;
+			margin: 0 8% 2.25rem auto;
+		`};
+		${media.greaterThan('desktop')`
+			width: 55%;
+			margin: 0px 8% 2.25rem auto;
+		`};
 	}
 
 	> ul,

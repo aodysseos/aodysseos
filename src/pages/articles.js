@@ -1,21 +1,17 @@
 import React from 'react'
-import { Link } from 'gatsby'
-import _ from 'lodash'
 import { useStaticQuery, graphql } from 'gatsby'
+import styled from 'styled-components'
+import _ from 'lodash'
 
 import Layout from '../components/layout'
-import ArticleCard from '../components/Article/card'
 import SEO from '../components/seo'
 import Banner from '../components/Banner'
-import styled from 'styled-components'
+import ArticlesContainer from '../components/Article/ArticlesContainer'
 
-const ArticleList = styled.div`
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	align-items: stretch;
-	margin-top: 64px;
-`
+import { getArticle } from '../utils/contentful/helpers'
+
+import vars from '../styles/vars'
+import media from '../styles/media'
 
 const Articles = () => {
 	const data = useStaticQuery(graphql`
@@ -49,16 +45,26 @@ const Articles = () => {
 			}
 		}
 	`)
-	const articlesArray = _.get(data, 'allContentfulArticle.edges', [])
+
+	const articles = _(data).get('allContentfulArticle.edges').map(getArticle)
+
+	const Container = styled.div`
+		padding: 0 ${vars.gap.mobile};
+		${media.greaterThan('tablet')`
+			padding: 0 ${vars.gap.tablet};
+		`};
+		${media.greaterThan('desktop')`
+			padding: 0 ${vars.gap.desktop};
+		`};
+	`
 
 	return (
 		<Layout>
 			<SEO title="Articles" />
-			<Banner
-				title={`Articles`}
-				subtitle={`I write about concepts I struggle to understand, to undestand them better.`}
-			/>
-			<ArticleList>{_.map(articlesArray, ({ node }, index) => <ArticleCard key={index} {...node} />)}</ArticleList>
+			<Container>
+				<Banner title={`Articles`} subtitle={`Explore`} />
+				<ArticlesContainer articles={articles} />
+			</Container>
 		</Layout>
 	)
 }

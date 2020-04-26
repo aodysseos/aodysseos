@@ -12,10 +12,10 @@ const H1 = styled.h1(
 	variant({
 		variants: {
 			primary: {
-				fontSize: '34px',
-				lineHeight: '40px',
+				fontSize: [ 30, 30, 34 ],
+				lineHeight: 1.17,
 				fontWeight: 800,
-				marginBottom: '0.5rem'
+				marginBottom: [ '0.5rem', '0.5rem', '0.5rem' ]
 			},
 			secondary: {
 				fontWeight: 400
@@ -32,10 +32,10 @@ const H2 = styled.h2(
 	variant({
 		variants: {
 			primary: {
-				fontSize: '34px',
-				lineHeight: '40px',
+				fontSize: [ 30, 30, 34 ],
+				lineHeight: 1.17,
 				fontWeight: 300,
-				letterSpacing: '-0.8px'
+				letterSpacing: [ -0.8, -0.8, -0.8 ]
 			},
 			secondary: {
 				fontWeight: 800,

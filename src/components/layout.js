@@ -16,11 +16,12 @@ import Footer from './Footer'
 
 import theme from '../styles/theme'
 import vars from '../styles/vars'
+import media from '../styles/media'
 
 import '../styles/global.css'
 
 const Main = styled.main`
-	padding-top: ${vars.sideWidth.sm}px;
+	padding-top: ${vars.sideWidth.desktop};
 	background-color: white;
 `
 
@@ -35,7 +36,13 @@ const Container = styled.div`
 	height: 100%;
 	max-width: 1440px;
 	margin: 0 auto;
-	padding: 0 calc(${vars.sideWidth.sm}px + 10px);
+	padding: 0 ${vars.sideWidth.mobile};
+	${media.greaterThan('tablet')`
+		padding: 0 ${vars.sideWidth.tablet};
+	`};
+	${media.greaterThan('desktop')`
+		padding: 0 ${vars.sideWidth.desktop};
+	`};
 `
 
 const Layout = ({ page, children }) => {

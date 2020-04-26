@@ -33,6 +33,7 @@
 		"react-helmet": "^5.2.1",
 		"react-syntax-highlighter": "^12.2.1",
 		"styled-components": "^5.0.1",
+		"styled-media-query": "^2.1.2",
 		"styled-system": "^5.1.4",
 		"svg-react-loader": "^0.4.6",
 		"yup": "^0.28.3"

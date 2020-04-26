@@ -30,3 +30,7 @@ export const getAssetSrc = (assetObject, options) => {
 export const getAssetTitle = (assetObject) => {
 	return _get(assetObject, 'fields.title')
 }
+
+export const getArticle = (articleObject) => {
+	return _get(articleObject, 'node')
+}
