@@ -62,12 +62,12 @@ const Layout = ({ page, children }) => {
 				<Wrapper>
 					<Header siteTitle={data.site.siteMetadata.title} />
 					<SideMenu
-						links={[ { name: 'Contact', url: '/contact' }, { name: 'About', url: '/about' } ]}
+						links={[ { name: 'Articles', url: '/articles' }, { name: 'Projects', url: '/projects' } ]}
 						position={`left`}
 					/>
 					<Container>{children}</Container>
 					<SideMenu
-						links={[ { name: 'Articles', url: '/articles' }, { name: 'Projects', url: '/projects' } ]}
+						links={[ { name: 'Contact', url: '/contact' }, { name: 'About', url: '/about' } ]}
 						position={`right`}
 					/>
 					{page === 'Home' ? <Footer /> : null}

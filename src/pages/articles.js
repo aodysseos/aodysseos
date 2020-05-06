@@ -8,10 +8,18 @@ import SEO from '../components/seo'
 import Banner from '../components/Banner'
 import ArticlesContainer from '../components/Article/ArticlesContainer'
 
-import { getArticle } from '../utils/contentful/helpers'
-
 import vars from '../styles/vars'
 import media from '../styles/media'
+
+const Container = styled.div`
+	padding: 0 ${vars.gap.mobile};
+	${media.greaterThan('tablet')`
+			padding: 0 ${vars.gap.tablet};
+		`};
+	${media.greaterThan('desktop')`
+			padding: 0 ${vars.gap.desktop};
+		`};
+`
 
 const Articles = () => {
 	const data = useStaticQuery(graphql`
@@ -46,17 +54,7 @@ const Articles = () => {
 		}
 	`)
 
-	const articles = _(data).get('allContentfulArticle.edges').map(getArticle)
-
-	const Container = styled.div`
-		padding: 0 ${vars.gap.mobile};
-		${media.greaterThan('tablet')`
-			padding: 0 ${vars.gap.tablet};
-		`};
-		${media.greaterThan('desktop')`
-			padding: 0 ${vars.gap.desktop};
-		`};
-	`
+	const articles = _(data).get('allContentfulArticle.edges').map((entry) => entry.node)
 
 	return (
 		<Layout>

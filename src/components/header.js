@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import vars from '../styles/vars'
 
 const Head = styled.div`
+	z-index: 9;
 	width: 100%;
 	height: ${vars.headerWidth.sm}px;
 	position: fixed;

@@ -10,7 +10,7 @@ const P1 = styled.p(
 	variant({
 		variants: {
 			primary: {
-				fontSize: '19px',
+				fontSize: '1.1875rem',
 				lineHeight: 1.9,
 				fontWeight: 300
 			},

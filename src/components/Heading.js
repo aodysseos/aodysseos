@@ -74,10 +74,22 @@ const H4 = styled.h4(
 				fontWeight: 300,
 				display: 'inline',
 				letterSpacing: '-0.8px'
-			},
-			secondary: {
-				color: 'black',
-				bg: 'secondary'
+			}
+		}
+	})
+)
+
+const H5 = styled.h5(
+	{
+		fontFamily: ({ theme }) => theme.fontFamily,
+		color: ({ theme }) => theme.primary
+	},
+	variant({
+		variants: {
+			primary: {
+				fontSize: [ 19, 19, 19 ],
+				lineHeight: 1.17,
+				fontWeight: 600
 			}
 		}
 	})
@@ -157,6 +169,7 @@ const Heading = ({ heading, variant, children, ...rest }) =>
 		2: <H2 variant={variant}>{children}</H2>,
 		3: <H3 variant={variant}>{children}</H3>,
 		4: <H4 variant={variant}>{children}</H4>,
+		5: <H5 variant={variant}>{children}</H5>,
 		tag: (
 			<Tag variant={variant} {...rest}>
 				{children}

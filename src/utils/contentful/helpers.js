@@ -31,6 +31,45 @@ export const getAssetTitle = (assetObject) => {
 	return _get(assetObject, 'fields.title')
 }
 
-export const getArticle = (articleObject) => {
-	return _get(articleObject, 'node')
+export const getEntry = (node) => {
+	return _get(node, 'data.target')
+}
+
+export const getEntrySlug = (node) => {
+	return _get(node, 'data.target.fields.slug')
+}
+
+export const getEntryId = (node) => {
+	return _get(node, 'data.target.sys.contentType.sys.id')
+}
+
+export const getEntryType = (node) => {
+	return _get(node, 'data.target.sys.contentType.sys')
+}
+
+export const getEntryFields = (node) => {
+	return _get(node, 'data.target.fields')
+}
+
+export const getEntryHyperlinkType = (node) => {
+	const slug = getEntrySlug(node)
+	const type = getEntryId(node)
+	switch (type) {
+		case 'article':
+			return `/articles/${slug}`
+		default:
+			return `/${slug}`
+	}
+}
+
+export const getCodeSnippetType = (node) => {
+	return _get(node, 'data.target.fields.type')
+}
+
+export const getEntryURL = (entryNode) => {
+	const nodeType = _get(entryNode, 'nodeType')
+	const url = getEntryHyperlinkType(entryNode)
+	if (nodeType === 'entry-hyperlink') {
+		return url
+	}
 }

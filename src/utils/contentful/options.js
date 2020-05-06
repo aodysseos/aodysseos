@@ -1,59 +1,30 @@
 import React from 'react'
-import Gist from 'react-gist'
-import _ from 'lodash'
+import _get from 'lodash/get'
+import _split from 'lodash/split'
 import styled from 'styled-components'
 import { MARKS, BLOCKS, INLINES } from '@contentful/rich-text-types'
-import SyntaxHighlighter from 'react-syntax-highlighter'
-import { a11yLight } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 
-import { getAssetType, getAssetSrc, getAssetTitle } from './helpers'
+import {
+	getEntryId,
+	getEntryFields,
+	getCodeSnippetType,
+	getAssetType,
+	getAssetSrc,
+	getAssetTitle,
+	getEntryURL
+} from './helpers'
 
 import Heading from '../../components/Heading'
 import Paragraph from '../../components/Paragraph'
+import Link from '../../components/Link'
+import CodeSnippet from '../../components/CodeSnippet'
+import Code from '../../components/Code'
 
 import Image from '../../components/Article/ArticleImage'
 
 const Video = styled.video`max-width: 100%;`
 
-const ExternalLink = styled.a`
-	position: relative;
-	color: ${(props) => props.theme.primary};
-	&::after {
-		content: "";
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		height: 1px;
-		width: 100%;
-		background-color: ${(props) => props.theme.primary};
-	}
-`
-
-const IframeContainer = styled.div`
-	position: relative;
-	overflow: hidden;
-	width: 100%;
-	height: auto;
-	& iframe {
-		width: 100%;
-		height: 500px;
-		border: 0;
-		overflow: hidden;
-	}
-`
-
 const Img = ({ children, alt }) => <Image src={children} alt={alt} />
-
-const Codesandbox = ({ title, uri }) => (
-	<IframeContainer>
-		<iframe
-			src={uri}
-			title={title}
-			allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr"
-			sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-		/>
-	</IframeContainer>
-)
 
 const getHyperlinkObject = (hyperlinkNode) => {
 	const hyperlinkOptions = {
@@ -61,16 +32,23 @@ const getHyperlinkObject = (hyperlinkNode) => {
 		codesandbox: 'https://codesandbox.io/embed/'
 	}
 
-	const title = _.get(hyperlinkNode, 'content.0.value', '')
-	const uri = _.get(hyperlinkNode, 'data.uri')
-	const isGithub = uri.startsWith(hyperlinkOptions.gist)
-	const isCodeSandbox = uri.startsWith(hyperlinkOptions.codesandbox)
+	const title = _get(hyperlinkNode, 'content.0.value', '')
+	const uri = _get(hyperlinkNode, 'data.uri')
+
+	let isGithub = false
+	let isCodeSandbox = false
+	if (uri) {
+		isGithub = uri.startsWith(hyperlinkOptions.gist)
+		isCodeSandbox = uri.startsWith(hyperlinkOptions.codesandbox)
+	} else {
+		const target = _get(hyperlinkNode, 'data.target')
+	}
 
 	if (isGithub) {
 		return {
 			title,
 			type: 'gist',
-			id: _.split(uri, /^((http[s]):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.js)/)[6]
+			id: _split(uri, /^((http[s]):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)(.js)/)[6]
 		}
 	} else if (isCodeSandbox) {
 		return {
@@ -83,17 +61,15 @@ const getHyperlinkObject = (hyperlinkNode) => {
 	}
 }
 
-const getAssetObject = (assetNode, children) => {
-	const assetObject = _.get(assetNode, 'data.target')
-	const [ assetType ] = getAssetType(assetObject).split('/')
+const getEmbededEntry = (node, children) => {
+	const fields = getEntryFields(node)
+	const entryId = getEntryId(node)
 
-	switch (assetType) {
-		case 'gist':
-			return <Gist />
-		case 'codesandbox':
-			return <Codesandbox {..._.get(assetObject, 'fields')} />
-		default:
-			return children
+	if (entryId === 'codeSnippet') {
+		const type = getCodeSnippetType(node)
+		return <CodeSnippet type={type} {...fields} />
+	} else {
+		return children
 	}
 }
 
@@ -102,11 +78,7 @@ const options = {
 		[MARKS.BOLD]: (text) => <b key={`${text}-key`}>{text}</b>,
 		[MARKS.ITALIC]: (text) => <div>{text}</div>,
 		[MARKS.UNDERLINE]: (text) => <div>{text}</div>,
-		[MARKS.CODE]: (text) => (
-			<SyntaxHighlighter language="javascript" style={a11yLight} wrapLines>
-				{text}
-			</SyntaxHighlighter>
-		)
+		[MARKS.CODE]: (text) => <Code language="javascript">{text}</Code>
 	},
 	renderNode: {
 		[BLOCKS.HEADING_3]: (node, children) => (
@@ -135,31 +107,48 @@ const options = {
 			</Paragraph>
 		),
 		[BLOCKS.EMBEDDED_ENTRY]: (node, children) => {
-			return getAssetObject(node, children)
+			// const target = _get(node, 'data.target')
+			return getEmbededEntry(node, children)
 		},
 		'embedded-asset-block': (node, children) => {
-			const [ assetType ] = getAssetType(node.data.target).split('/')
-			if (assetType === 'video') {
-				return <Video assetType={getAssetType(node.data.target)}>{getAssetSrc(node.data.target)}</Video>
-			}
-			if (assetType === 'image') {
-				return <Img alt={getAssetTitle(node.data.target)}>{getAssetSrc(node.data.target)}</Img>
+			const target = _get(node, 'data.target')
+			const [ assetType ] = getAssetType(target).split('/')
+
+			switch (assetType) {
+				case 'image':
+					return <Img alt={getAssetTitle(target)}>{getAssetSrc(target)}</Img>
+				case 'video':
+					return <Video>{getAssetSrc(target)}</Video>
+				default:
+					return (
+						<Link href={getAssetSrc(target)} target="_blank" variant="external">
+							{children}
+						</Link>
+					)
 			}
 		},
 		[INLINES.HYPERLINK]: (node, children) => {
 			const hyperlinkObj = getHyperlinkObject(node)
 			switch (hyperlinkObj.type) {
 				case 'gist':
-					return <Gist {...hyperlinkObj} />
+					return <CodeSnippet type="gist" {...hyperlinkObj} />
 				case 'codesandbox':
-					return <Codesandbox {...hyperlinkObj} />
+					return <CodeSnippet type="codesandbox" {...hyperlinkObj} />
 				default:
 					return (
-						<ExternalLink target="_blank" href={hyperlinkObj.uri}>
+						<Link href={hyperlinkObj.uri} target="_blank" variant="primary">
 							{hyperlinkObj.title}
-						</ExternalLink>
+						</Link>
 					)
 			}
+		},
+		[INLINES.ENTRY_HYPERLINK]: (node, children) => {
+			const url = getEntryURL(node)
+			return (
+				<Link href={url} variant="primary">
+					{children}
+				</Link>
+			)
 		}
 	}
 }
