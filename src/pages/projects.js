@@ -11,7 +11,7 @@ const Projects = () => {
 	return (
 		<Layout>
 			<SEO title="Projects" />
-			<Banner title={`Projects`} subtitle={`I write about Web development, Javascript, opinion and more.`} />
+			<Banner title={`Projects`} subtitle={``} />
 		</Layout>
 	)
 }
