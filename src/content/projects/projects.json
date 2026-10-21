@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Personal Website",
+    "description": "Portfolio site built with Astro, Three.js ASCII statue hero and dark mode.",
+    "tags": ["Astro", "React", "Three.js"],
+    "url": "https://www.andreasodysseos.com",
+    "github": "https://github.com/aodysseos/aodysseos",
+    "colorBackground": "#1a1a2e",
+    "icons": []
+  },
+  {
+    "title": "Serverless Contact Form",
+    "description": "A serverless contact form with AWS Lambda, SES and API Gateway.",
+    "tags": ["AWS", "Lambda", "React"],
+    "url": null,
+    "github": null,
+    "colorBackground": "#2d1b4e",
+    "icons": []
+  }
+]

@@ -1,0 +1,150 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="About" description="About Andreas Odysseos — Software Engineer">
+  <section class="about">
+    <div class="about__hero">
+      <h1>About</h1>
+      <p class="about__intro">
+        <!-- Replace with your own bio -->
+        Software Engineer with a passion for building clean, performant web experiences.
+        Based in London, working across the full stack with a focus on JavaScript and modern web technologies.
+      </p>
+    </div>
+
+    <section class="about__section">
+      <h2>Experience</h2>
+      <div class="timeline">
+        <div class="timeline__item">
+          <div class="timeline__marker"></div>
+          <div class="timeline__content">
+            <h3>Software Engineer</h3>
+            <p class="timeline__company">Company Name</p>
+            <p class="timeline__date">2022 — Present</p>
+            <p class="timeline__desc">Description of your role and responsibilities.</p>
+          </div>
+        </div>
+        <div class="timeline__item">
+          <div class="timeline__marker"></div>
+          <div class="timeline__content">
+            <h3>Previous Role</h3>
+            <p class="timeline__company">Previous Company</p>
+            <p class="timeline__date">2019 — 2022</p>
+            <p class="timeline__desc">Description of your role and responsibilities.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about__section">
+      <h2>Technologies</h2>
+      <div class="skills">
+        {['JavaScript', 'TypeScript', 'React', 'Node.js', 'AWS', 'Python', 'GraphQL', 'Docker', 'PostgreSQL', 'Git'].map((skill) => (
+          <span class="skills__tag">{skill}</span>
+        ))}
+      </div>
+    </section>
+  </section>
+</BaseLayout>
+
+<style>
+  .about {
+    padding: 5rem 0 4rem;
+  }
+
+  .about__hero {
+    margin-bottom: 4rem;
+  }
+
+  .about__hero h1 {
+    font-size: 2.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .about__intro {
+    font-size: 1.125rem;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--color-secondary);
+    max-width: 600px;
+  }
+
+  .about__section {
+    margin-bottom: 3.5rem;
+  }
+
+  .about__section h2 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 2rem;
+    color: var(--color-secondary);
+  }
+
+  .timeline {
+    border-left: 1px solid var(--color-border);
+    padding-left: 2rem;
+  }
+
+  .timeline__item {
+    position: relative;
+    margin-bottom: 2.5rem;
+  }
+
+  .timeline__marker {
+    position: absolute;
+    left: calc(-2rem - 4px);
+    top: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+  }
+
+  .timeline__content h3 {
+    font-size: 1.125rem;
+    font-weight: 800;
+    margin-bottom: 0.25rem;
+  }
+
+  .timeline__company {
+    font-weight: 400;
+    color: var(--color-primary);
+    margin-bottom: 0.25rem;
+  }
+
+  .timeline__date {
+    font-size: 0.85rem;
+    color: var(--color-secondary);
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline__desc {
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--color-secondary);
+  }
+
+  .skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .skills__tag {
+    font-size: 0.85rem;
+    font-weight: 400;
+    padding: 0.4rem 0.9rem;
+    border: 1px solid var(--color-border);
+    border-radius: 2px;
+    color: var(--color-primary);
+    transition: background-color var(--transition-fast), border-color var(--transition-fast);
+  }
+
+  .skills__tag:hover {
+    background-color: var(--color-primary);
+    color: var(--color-background);
+    border-color: var(--color-primary);
+  }
+</style>

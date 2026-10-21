@@ -1,0 +1,45 @@
+---
+const currentPath = Astro.url.pathname;
+---
+
+<header class="header">
+  <a href="/" class="logo" aria-label="Home">
+    <span class="logo__flipped">Andreas</span>odysseos
+  </a>
+</header>
+
+<style>
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    height: var(--header-height);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-background);
+    transition: background-color var(--transition-base);
+  }
+
+  .logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    letter-spacing: 0.05em;
+    transition: color var(--transition-fast);
+  }
+
+  .logo:hover {
+    color: var(--color-secondary);
+  }
+
+  .logo__flipped {
+    display: inline-block;
+    line-height: 1;
+    transform: scale(1, -1);
+  }
+</style>

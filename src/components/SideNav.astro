@@ -1,0 +1,108 @@
+---
+interface Props {
+  links: { name: string; url: string }[];
+  position: 'left' | 'right';
+}
+
+const { links, position } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+
+<nav class:list={['sidenav', `sidenav--${position}`]} aria-label={`${position} navigation`}>
+  <ul class="sidenav__list">
+    {links.map((link) => (
+      <li class="sidenav__item">
+        <a
+          href={link.url}
+          class:list={['sidenav__link', { active: currentPath.startsWith(link.url) }]}
+        >
+          <span>{link.name}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  .sidenav {
+    width: var(--side-width);
+    height: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 90;
+    display: none;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .sidenav--left {
+    left: 10px;
+    transform: rotate(180deg);
+  }
+
+  .sidenav--right {
+    right: 10px;
+  }
+
+  @media (min-width: 1200px) {
+    .sidenav {
+      display: flex;
+    }
+  }
+
+  .sidenav__list {
+    list-style: none;
+  }
+
+  .sidenav__item {
+    position: relative;
+    pointer-events: auto;
+  }
+
+  .sidenav__item:nth-of-type(1) {
+    margin: 5vh 0 17.5vh;
+  }
+
+  .sidenav__item:nth-child(2)::before {
+    content: '';
+    position: absolute;
+    bottom: calc(100% + 2.5vh);
+    left: 50%;
+    height: 12.5vh;
+    width: 1px;
+    background-color: var(--color-primary);
+  }
+
+  .sidenav__link {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    writing-mode: vertical-lr;
+    padding: 10px 20px;
+    color: var(--color-primary);
+    transition: color var(--transition-fast);
+  }
+
+  .sidenav__link span {
+    position: relative;
+  }
+
+  .sidenav__link span::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 1px;
+    background-color: var(--color-primary);
+    transform: scaleY(0);
+    transform-origin: bottom left;
+    transition: transform var(--transition-base);
+    will-change: transform;
+  }
+
+  .sidenav__link:hover span::after,
+  .sidenav__link.active span::after {
+    transform: scaleY(1);
+  }
+</style>

@@ -1,0 +1,252 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import projectsData from '../content/projects/projects.json';
+---
+
+<BaseLayout title="Projects" description="Projects by Andreas Odysseos">
+  <section class="projects">
+    <div class="banner">
+      <h1 class="banner__title">Projects</h1>
+      <h2 class="banner__subtitle"></h2>
+    </div>
+
+    <div class="projects-grid">
+      {projectsData.map((project, index) => (
+        <article class:list={['card', { 'card--featured': index === 0 }]}>
+          <div
+            class="card__banner"
+            style={`background-color: ${project.colorBackground || '#2b2b2b'}`}
+          >
+            {project.icons && project.icons.length > 0 && (
+              <div class="card__icons">
+                {project.icons.map((icon) => (
+                  <img src={icon} alt="" class="card__icon" />
+                ))}
+              </div>
+            )}
+          </div>
+          <div class="card__title">
+            <div class="card__title-link">
+              <h3>{project.title}</h3>
+              {project.description && <h4>{project.description}</h4>}
+            </div>
+            <div class="card__meta">
+              {project.tags.map((tag, i) => (
+                <>
+                  <span class="card__tag">{tag}</span>
+                  {i < project.tags.length - 1 && <span class="card__sep">, </span>}
+                </>
+              ))}
+            </div>
+            <div class="card__links">
+              {project.url && (
+                <a href={project.url} target="_blank" rel="noopener noreferrer">
+                  <span>Live</span>
+                </a>
+              )}
+              {project.github && (
+                <a href={project.github} target="_blank" rel="noopener noreferrer">
+                  <span>Source</span>
+                </a>
+              )}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .projects {
+    padding-bottom: 4rem;
+  }
+
+  /* Banner - matches original Heading component */
+  .banner {
+    margin-top: 76px;
+  }
+
+  .banner__title {
+    font-size: clamp(30px, 4vw, 34px);
+    line-height: 1.17;
+    font-weight: 800;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .banner__subtitle {
+    font-size: clamp(30px, 4vw, 34px);
+    line-height: 1.17;
+    font-weight: 300;
+    color: var(--color-secondary);
+    letter-spacing: -0.8px;
+  }
+
+  /* Projects grid - matches article card layout */
+  .projects-grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+    margin-top: 64px;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 100%;
+    margin-bottom: 3rem;
+  }
+
+  @media (min-width: 768px) {
+    .card {
+      flex: 0 0 50%;
+    }
+
+    .card:nth-child(odd) {
+      padding-left: 12px;
+    }
+
+    .card:nth-child(even) {
+      padding-right: 12px;
+    }
+
+    .card--featured {
+      flex: 0 0 100%;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .card__banner {
+    width: 100%;
+    height: 400px;
+    min-height: 400px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    overflow: hidden;
+    padding: 2rem;
+  }
+
+  .card__icons {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .card__icon {
+    width: auto;
+    max-width: 30%;
+    height: 100px;
+    max-height: 100px;
+    object-fit: contain;
+  }
+
+  /* Card title - matches original article card style */
+  .card__title {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    margin: 32px 0;
+  }
+
+  .card--featured .card__title {
+    width: 100%;
+    min-height: 192px;
+    padding: 2rem 0;
+    margin: 0;
+    background-color: var(--color-background);
+  }
+
+  @media (min-width: 768px) {
+    .card--featured .card__title {
+      width: 84%;
+      padding: 2rem;
+      margin: -64px auto 2rem 2%;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .card--featured .card__title {
+      width: 48%;
+      padding: 2rem;
+      margin: -64px auto 2rem 2%;
+    }
+  }
+
+  .card__title-link h3 {
+    font-size: 34px;
+    font-weight: 800;
+    display: inline;
+    color: var(--color-primary);
+    padding-right: 5px;
+  }
+
+  .card__title-link h4 {
+    font-size: 34px;
+    font-weight: 300;
+    display: inline;
+    color: var(--color-secondary);
+    letter-spacing: -0.8px;
+  }
+
+  /* Meta tags */
+  .card__meta {
+    margin-top: 32px;
+  }
+
+  .card__tag {
+    font-size: 0.875rem;
+    line-height: 1.1;
+    font-weight: 400;
+    letter-spacing: -0.8px;
+    color: var(--color-tertiary);
+  }
+
+  .card__sep {
+    color: var(--color-tertiary);
+  }
+
+  /* Links */
+  .card__links {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .card__links a {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--color-tertiary);
+  }
+
+  .card__links a span {
+    position: relative;
+  }
+
+  .card__links a span::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    background-color: var(--color-tertiary);
+    transform: scaleX(0);
+    transform-origin: bottom left;
+    transition: transform 0.3s ease-out;
+    will-change: transform;
+  }
+
+  .card__links a:hover span::after {
+    transform: scaleX(1);
+  }
+</style>
