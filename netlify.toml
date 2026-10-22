@@ -1,0 +1,10 @@
+# Overrides the build settings in the Netlify UI, which still point at the old Gatsby site.
+[build]
+  # The contact form reads PUBLIC_CONTACT_FORM_API; fall back to the endpoint already
+  # stored in Netlify under its Gatsby-era name.
+  command = "PUBLIC_CONTACT_FORM_API=${PUBLIC_CONTACT_FORM_API:-$GATSBY_AWS_CONTACT_FORM_API} npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "24"
+  ASTRO_TELEMETRY_DISABLED = "1"
