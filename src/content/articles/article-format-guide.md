@@ -27,10 +27,10 @@ Articles are defined in `src/content/articles/` and validated by the schema in `
 | `colorBackground` | No | Hero background, card background, gradient start (default: `#2b2b2b`) |
 | `colorPrimary` | No | Link underlines and accent color (default: `#ffffff`) |
 | `colorSecondary` | No | Subtitle color and gradient middle (default: `#767676`) |
-| `heroImage` | No | Listing card thumbnail when `bannerIcons` is empty — not shown on the article page |
+| `heroImage` | No | Article hero banner and listing card thumbnail when `bannerIcons` is empty |
 | `draft` | No | Set to `true` to hide from `/writing` (default: `false`) |
 
-This article uses `bannerIcons` for the hero. If you omit `bannerIcons` and provide `heroImage` instead (e.g. `heroImage: "/images/statue-render.jpg"`), the image appears as a background thumbnail on the writing listing page only.
+This article uses `bannerIcons` for the hero. If you omit `bannerIcons` and provide `heroImage` instead (e.g. `heroImage: "/images/statue-render.jpg"`), the image fills the article hero banner and appears as the thumbnail on the writing listing page.
 
 ### Typography
 

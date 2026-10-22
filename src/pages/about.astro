@@ -1,37 +1,134 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+const experience = [
+  {
+    title: 'Technical Lead',
+    company: 'Bodyswaps',
+    dates: 'Jan 2026 — Present',
+    description:
+      'Technical leadership for a VR and AI soft skills training platform: AI-powered immersive simulations that let people practise the conversations that matter.',
+  },
+  {
+    title: 'Engineering Team Lead',
+    company: 'Juro',
+    dates: 'Mar 2024 — Jan 2026',
+    description:
+      'Led the Contracts Repository team, owning delivery of projects end-to-end across a MongoDB and Docker-based platform.',
+  },
+  {
+    title: 'Senior Full-Stack Engineer',
+    company: 'Juro',
+    dates: 'Nov 2022 — Mar 2024',
+    description:
+      'Delivered integrations, observability and security improvements to the contract automation platform, working across React and Redis-backed services.',
+  },
+  {
+    title: 'Software Engineer',
+    company: 'Red Ant',
+    dates: 'Oct 2018 — Nov 2022',
+    description:
+      'Built customer integrations and platform features for the RetailOS digital store platform, including a two-way messaging system on Twilio and AWS (Lambda, SQS, SES).',
+  },
+  {
+    title: 'Software Developer',
+    company: 'Univers Labs',
+    dates: 'Nov 2015 — Oct 2018',
+    description:
+      'Designed and developed websites and web applications with React, React Native, D3.js, Node.js and WordPress.',
+  },
+];
+
+const education = [
+  {
+    degree: 'MSc Web Technology',
+    school: 'University of Southampton',
+    dates: '2014 — 2015',
+    grade: 'Distinction',
+  },
+  {
+    degree: 'BSc Computer Science',
+    school: 'The University of Sheffield',
+    dates: '2011 — 2014',
+    grade: 'Upper second-class honours (2:1)',
+  },
+];
+
+const skills = [
+  'JavaScript',
+  'TypeScript',
+  'React',
+  'React Native',
+  'Node.js',
+  'MongoDB',
+  'PostgreSQL',
+  'Redis',
+  'GraphQL',
+  'AWS',
+  'Docker',
+  'Python',
+  'Three.js',
+  'D3.js',
+  'Git',
+];
 ---
 
-<BaseLayout title="About" description="About Andreas Odysseos — Software Engineer">
+<BaseLayout title="About" description="About Andreas Odysseos — Technical Lead and Software Engineer">
   <section class="about">
     <div class="about__hero">
       <h1>About</h1>
       <p class="about__intro">
-        <!-- Replace with your own bio -->
-        Software Engineer with a passion for building clean, performant web experiences.
-        Based in London, working across the full stack with a focus on JavaScript and modern web technologies.
+        Technical Lead at Bodyswaps, building AI-powered immersive simulations for soft skills
+        training at scale. Over ten years of experience delivering customer-facing web applications,
+        from AI-driven platforms and real-time APIs to third-party integrations, with a focus on
+        microservices architecture, platform security and observability. Works closely with product
+        teams to take features from idea to production. Based in the UK.
       </p>
     </div>
 
     <section class="about__section">
       <h2>Experience</h2>
       <div class="timeline">
-        <div class="timeline__item">
-          <div class="timeline__marker"></div>
-          <div class="timeline__content">
-            <h3>Software Engineer</h3>
-            <p class="timeline__company">Company Name</p>
-            <p class="timeline__date">2022 — Present</p>
-            <p class="timeline__desc">Description of your role and responsibilities.</p>
+        {experience.map((role) => (
+          <div class="timeline__item">
+            <div class="timeline__marker"></div>
+            <div class="timeline__content">
+              <h3>{role.title}</h3>
+              <p class="timeline__company">{role.company}</p>
+              <p class="timeline__date">{role.dates}</p>
+              <p class="timeline__desc">{role.description}</p>
+            </div>
           </div>
-        </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="about__section">
+      <h2>Education</h2>
+      <div class="timeline">
+        {education.map((entry) => (
+          <div class="timeline__item">
+            <div class="timeline__marker"></div>
+            <div class="timeline__content">
+              <h3>{entry.degree}</h3>
+              <p class="timeline__company">{entry.school}</p>
+              <p class="timeline__date">{entry.dates}</p>
+              <p class="timeline__desc">{entry.grade}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="about__section">
+      <h2>Certifications</h2>
+      <div class="timeline">
         <div class="timeline__item">
           <div class="timeline__marker"></div>
           <div class="timeline__content">
-            <h3>Previous Role</h3>
-            <p class="timeline__company">Previous Company</p>
-            <p class="timeline__date">2019 — 2022</p>
-            <p class="timeline__desc">Description of your role and responsibilities.</p>
+            <h3>MongoDB Node.js Developer Path</h3>
+            <p class="timeline__company">MongoDB</p>
+            <p class="timeline__date">2024</p>
           </div>
         </div>
       </div>
@@ -40,7 +137,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <section class="about__section">
       <h2>Technologies</h2>
       <div class="skills">
-        {['JavaScript', 'TypeScript', 'React', 'Node.js', 'AWS', 'Python', 'GraphQL', 'Docker', 'PostgreSQL', 'Git'].map((skill) => (
+        {skills.map((skill) => (
           <span class="skills__tag">{skill}</span>
         ))}
       </div>
